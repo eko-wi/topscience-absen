@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+    <h1>TOPSCIENCE absen</h1><br>
+    <p>Dapatkan token absensi di lab dengan mengunjungi:</p><br>
+    <button id=getotp type="button" onclick="getotp()">TOPSCIENCE OTP generator</button>
+    <p id=otp>...</p><br>
+    <p id=hasil>...</p>
+
+    <script>
+      const gaslink="https://script.google.com/macros/s/AKfycbxCk4RMYfEdMGHp7H65H8zFglMbjSVh_K85MhWRkZKUAAjtlzGLsurvVKCByIAwp6ul5w/exec"
+      const devid = "esp-topscience-absen";
+      async function getotp(){
+        const otx = document.getElementById("otp");
+        otx.innerText="Menunggu... Anda akan langsung redirect ke form absensi.";
+        document.getElementById("getotp").disabled=true;
+        const res = await fetch(gaslink+"?id="+devid);
+        const d = await res.text();
+        var ip = atob(d);
+        otx.innerText = ip;        
+        console.log(ip+"/d");
+        const res2 = await fetch("http:"+ip+"/d");
+        const d2 = await res2.json();
+        document.getElementById('hasil').innerText=d2['d'];
+        //berikutnya langsung menuju google forms
+      }
+    </script>
+  </body>
+</html>
