@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>TOPScience - absen</title>
     <base target="_top">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <h1>TOPSCIENCE absen</h1><br>
-    <p>Dapatkan token absensi di lab dengan mengunjungi:</p><br>
+    <h1>TOPScience absen</h1><br>
+    <p>Dapatkan token kehadiran ekskul dengan mengunjungi:</p><br>
     <button id=getotp type="button" onclick="getotp()">TOPSCIENCE OTP generator</button>
     <p id=otp>...</p><br>
     <p id=hasil>...</p>
@@ -19,13 +21,11 @@
         document.getElementById("getotp").disabled=true;
         const res = await fetch(gaslink+"?id="+devid);
         const d = await res.text();
-        var ip = atob(d);
+        const ip = atob(d);
         otx.innerText = ip;        
-        console.log(ip+"/d");
-        const res2 = await fetch("http:"+ip+"/d");
-        const d2 = await res2.json();
-        document.getElementById('hasil').innerText=d2['d'];
-        //berikutnya langsung menuju google forms
+        console.log(ip+"/t");
+        document.getElementById('hasil').innerText="redirecting...";
+        location.href="http:"+ip+"/t";
       }
     </script>
   </body>
